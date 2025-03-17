@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Pegawai</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th {
+            background-color: #ddd;
+            text-align: center;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 10px;
+            
+        }
+        td{
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Data Pegawai</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nama</th>
+                <th>Umur</th>
+                <th>Jabatan</th>
+                <th>Status</th>
+                <th>Gaji Pokok</th>
+                <th>Tunjangan Jabatan</th>
+                <th>BPJS</th>
+                <th>Tunjangan Keluarga</th>
+                <th>Gaji Total</th>
+            </tr>
+        </thead>
+        <tbody id="data_pegawai"></tbody>
+    </table>
+
+
+    <script>
+        let pegawai = "Dodi Prayodi";
+        let umur = 25;
+        let jabatan = "Manager";
+        let status = "Menikah";
+
+        //gaji pokok
+        let gapok = 0
+        if (jabatan == "Manager") gapok = 15000000;
+        else if (jabatan == "Asisten Manager") gapok = 10000000;
+        else if (jabatan == "Staff") gapok = 5000000;
+        else gapok = 0;
+
+        //hitung tunjangan dan total
+        const t_jabatan = 0.15 * gapok;
+        const bpjs = 0.1 * gapok;
+        let t_keluarga = (status === "Menikah") ? 0.2 * gapok : 0;
+        const total_gaji = gapok + t_jabatan - bpjs + t_keluarga;
+
+        //menampilkan hasil ke dalam tabel
+        document.getElementById("data_pegawai").innerHTML = `
+            <tr>
+                <td>${pegawai}</td>
+                <td>${umur} tahun</td>
+                <td>${jabatan}</td>
+                <td>${status}</td>
+                <td>Rp. ${gapok.toLocaleString()}</td>
+                <td>Rp. ${t_jabatan.toLocaleString()}</td>
+                <td>Rp. ${bpjs.toLocaleString()}</td>
+                <td>Rp. ${t_keluarga.toLocaleString()}</td>
+                <td>Rp. ${total_gaji.toLocaleString()}</td>
+            </tr>
+        `;
+
+
+
+    </script>
+</body>
+
+</html>
